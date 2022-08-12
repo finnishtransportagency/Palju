@@ -34,7 +34,7 @@ const GridContainer = () => {
     setHeading(title);
 
     fetch(`${config.apiUrl}${folder || config.defaultFolder}/`, {
-      credentials: 'same-origin'
+      credentials: 'include'
     })
       .then(res => {
         if (!res.ok) {

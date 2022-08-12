@@ -16,13 +16,13 @@
     "react-i18next": "^11.11.4",
     "react-router-breadcrumbs-hoc": "^4.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build:dev": "REACT_APP_API_URL=\"https://devpalju.testivaylapilvi.fi/hakemisto/\" react-scripts build",
-    "build:test": "REACT_APP_API_URL=\"https://palju.testivaylapilvi.fi/hakemisto/\" react-scripts build",
+    "build:test": "REACT_APP_API_URL=\"https://apipaljutest.testivaylapilvi.fi/palju/hakemisto/\" react-scripts build",
     "build:prod": "REACT_APP_API_URL=\"https://palju.vaylapilvi.fi/hakemisto/\" react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

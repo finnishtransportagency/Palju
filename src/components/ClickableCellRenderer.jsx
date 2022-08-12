@@ -9,7 +9,9 @@ const Cell = props => {
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    fetch(`${config.apiUrl}/${props.value}`)
+    fetch(`${config.apiUrl}/${props.value}`, {
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then(data => {
         const index = data?.aineisto?.find(row =>
@@ -20,7 +22,9 @@ const Cell = props => {
           return;
         }
 
-        fetch(`${config.apiUrl}/${index.tiedosto}`)
+        fetch(`${config.apiUrl}/${index.tiedosto}`, {
+          credentials: 'include'
+        })
           .then(res => res.json())
           .then(data => setIndexHTML(data.signedUrl));
       });
@@ -48,7 +52,7 @@ const ClickableCellRenderer = props => {
   // response should have Content-Disposition header set to attachment
   const fetchFile = () => {
     fetch(`${config.apiUrl}${props.value || config.defaultFolder}`, {
-      credentials: 'same-origin'
+      credentials: 'include'
     })
       .then(res => res.json())
       .then(({ signedUrl }) => {

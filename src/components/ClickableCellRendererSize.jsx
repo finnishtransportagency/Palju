@@ -17,7 +17,9 @@ export const Cell = props => {
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    fetch(`${config.apiUrlFolders}/${props.value}`)
+    fetch(`${config.apiUrlFolders}/${props.value}`, {
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then(data => {
         const index = data?.aineisto?.find(row =>
@@ -28,7 +30,9 @@ export const Cell = props => {
           return;
         }
       
-        fetch(`${config.apiUrlFolders}/${index.tiedosto}`)
+        fetch(`${config.apiUrlFolders}/${index.tiedosto}`, {
+          credentials: 'include'
+        })
           .then(res => res.json())        
           .then(data => setIndexHTML(data.url))                
       });
