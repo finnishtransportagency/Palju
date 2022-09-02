@@ -8,11 +8,19 @@ import logo_en from '../img/logo_en.png';
 import Grid from './Grid';
 import { config } from '../App';
 
+const getIdToken = () => {
+  const idTokenCookie = document.cookie
+    .split(';')
+    .find(c => c.indexOf('idToken=') >= 0)
+  return idTokenCookie ? idTokenCookie.substring(idTokenCookie.indexOf('=') + 1) : ''  
+}
+
 const GridContainer = () => {
   let { folder } = useParams();
   const [rowData, setRowData] = useState(null);
   const [fetchError, setFetchError] = useState(false);
   const [heading, setHeading] = useState('');
+  const [idToken] = useState(getIdToken())
   const ref = React.useRef(null);
   const { pathname } = useLocation();
 
@@ -34,7 +42,9 @@ const GridContainer = () => {
     setHeading(title);
 
     fetch(`${config.apiUrl}${folder || config.defaultFolder}/`, {
-      credentials: 'include'
+      headers: {
+        Authorization: 'Bearer ' + idToken
+      }
     })
       .then(res => {
         if (!res.ok) {
@@ -54,7 +64,7 @@ const GridContainer = () => {
         setFetchError(true);
         setRowData([]);
       });
-  }, [folder, t]);
+  }, [folder, t, idToken]);
 
   return (
     <>
@@ -105,7 +115,7 @@ const GridContainer = () => {
           <h1 id='content'>{heading}</h1>
         </div>
       </div>
-      <Grid rowData={rowData} fetchError={fetchError} />
+      <Grid rowData={rowData} fetchError={fetchError} idToken={idToken} />
     </>
   );
 };

@@ -10,7 +10,9 @@ export const Cell = props => {
 
   React.useEffect(() => {
     fetch(`${config.apiUrlFolders}/${props.value}`, {
-      credentials: 'include'
+      headers: {
+        Authorization: 'Bearer ' + props.idToken
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -23,7 +25,9 @@ export const Cell = props => {
         }
 
         fetch(`${config.apiUrlFolders}/${index.tiedosto}`, {
-          credentials: 'include'
+          headers: {
+            Authorization: 'Bearer ' + props.idToken
+          }
         })
           .then(res => res.json())
           .then(data => setIndexHTML(data.url))          
