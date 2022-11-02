@@ -29,7 +29,7 @@ jobs:
     - name: Package
       if: always() # run this even if tests fail
       run: |
-        yarn build:test && zip -r ava.zip build/
+        yarn build:test && zip -r palju-front.zip build/
 
     - name: Create release tag
       if: always() # run this even if tests fail
@@ -61,7 +61,7 @@ jobs:
             });
             
             console.log(result);
-            return result.data.upload_url.replace("{?name,label}", "?name=ava.zip");
+            return result.data.upload_url.replace("{?name,label}", "?name=palju-front.zip");
           } catch (error) {
             core.setFailed(error.message);
             return error;
@@ -75,6 +75,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.release-step.outputs.result }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./ava.zip
-        asset_name: ava.zip
+        asset_path: ./palju-front.zip
+        asset_name: palju-front.zip
         asset_content_type: application/zip
