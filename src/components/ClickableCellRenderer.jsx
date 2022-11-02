@@ -3,13 +3,17 @@ import { withRouter, Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { config } from '../App';
 import { getParentPath } from '../helpers';
-
+  
 const Cell = props => {
   const [indexHTML, setIndexHTML] = React.useState(null);
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    fetch(`${config.apiUrl}/${props.value}`)
+    fetch(`${config.apiUrl}/${props.value}`, {
+      headers: {
+        Authorization: 'Bearer ' + props.idToken
+      }
+    })
       .then(res => res.json())
       .then(data => {
         const index = data?.aineisto?.find(row =>
@@ -20,7 +24,11 @@ const Cell = props => {
           return;
         }
 
-        fetch(`${config.apiUrl}/${index.tiedosto}`)
+        fetch(`${config.apiUrl}/${index.tiedosto}`, {
+          headers: {
+            Authorization: 'Bearer ' + props.idToken
+          }
+        })
           .then(res => res.json())
           .then(data => setIndexHTML(data.signedUrl));
       });
@@ -48,7 +56,9 @@ const ClickableCellRenderer = props => {
   // response should have Content-Disposition header set to attachment
   const fetchFile = () => {
     fetch(`${config.apiUrl}${props.value || config.defaultFolder}`, {
-      credentials: 'same-origin'
+      headers: {
+        Authorization: 'Bearer ' + props.idToken
+      }
     })
       .then(res => res.json())
       .then(({ signedUrl }) => {

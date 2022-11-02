@@ -19,7 +19,7 @@ const CustomLoadingOverlay = () => {
   );
 };
 
-const Grid = ({ rowData, fetchError, history, location }) => {
+const Grid = ({ rowData, fetchError, history, location, idToken }) => {
   const [gridApi, setGridApi] = useState(null);
   const [pageCounter, setPageCounter] = useState(1);
   const [pageTotalCount, setpageTotalCount] = useState(null);
@@ -172,6 +172,7 @@ const Grid = ({ rowData, fetchError, history, location }) => {
             headerName={t('name')}
             field='tiedosto'
             cellRenderer='clickableCellRenderer'
+            cellRendererParams={{ idToken }}          
             sortable={true}
           />
           <AgGridColumn
@@ -184,6 +185,7 @@ const Grid = ({ rowData, fetchError, history, location }) => {
             headerName={t('last_modified')}
             field='lastmodified'
             cellRenderer='clickableCellRendererModified'
+            cellRendererParams={{ idToken }}          
             sortable={true}
           />         
           <AgGridColumn            
@@ -196,6 +198,7 @@ const Grid = ({ rowData, fetchError, history, location }) => {
             headerName={t('size')}
             field='size'
             cellRenderer='clickableCellRendererSize'
+            cellRendererParams={{ idToken }}          
             sortable={true}       
           />
         </AgGridReact>
