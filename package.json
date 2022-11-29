@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^12.1.10",
     "ag-grid-community": "^25.1.0",
     "ag-grid-react": "^25.1.0",
+    "dotenv": "^16.0.3",
+    "dotenv-cli": "^6.0.0",
     "i18next": "^20.3.5",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
@@ -21,8 +23,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build:test": "REACT_APP_API_URL=\"https://apipaljutest.testivaylapilvi.fi/palju/hakemisto/\" CI=false && react-scripts build",
-    "build:prod": "REACT_APP_API_URL=\"https://apipalju.vaylapilvi.fi/palju/hakemisto/\" CI=false && react-scripts build",
+    "build:test": "dotenv -e .env.test -- react-scripts build",
+    "build:prod": "dotenv -e .env.production -- react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -45,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "react-inject-env": "^2.1.0"
   }
 }
