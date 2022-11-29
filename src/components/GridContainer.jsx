@@ -113,6 +113,17 @@ const GridContainer = () => {
 
         <div className='content-area'>
           <h1 id='content'>{heading}</h1>
+
+          <p tabIndex='-1'>
+            {t('about_open_contact_text')}:{' '}
+            <a
+              tabIndex='0'
+              href={`mailto:${t('about_open_contact_email')}`}
+              rel='noreferrer'
+            >
+              {t('about_open_contact_email')}
+            </a>
+          </p>
         </div>
       </div>
       <Grid rowData={rowData} fetchError={fetchError} idToken={idToken} />
