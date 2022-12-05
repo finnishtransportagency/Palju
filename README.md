@@ -1,5 +1,4 @@
 # Finnish Transport Infrastructure Agency - Service platform for publications
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## How to develop locally
