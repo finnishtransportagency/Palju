@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import i18n from 'i18next';
@@ -6,85 +6,42 @@ import { useTranslation } from 'react-i18next';
 import logo from '../img/vayla_sivussa_fi_sv_rgb.png';
 import logo_en from '../img/logo_en.png';
 import Grid from './Grid';
-import { config } from '../App';
-
-const getIdToken = () => {
-  const idTokenCookie = document.cookie
-    .split(';')
-    .find(c => c.indexOf('idToken=') >= 0)
-  return idTokenCookie ? idTokenCookie.substring(idTokenCookie.indexOf('=') + 1) : ''  
-}
+import { useTitle } from "../hooks/useTitle";
+import { useFolderApiData } from "../hooks/useFolderApiData";
 
 const GridContainer = () => {
   let { folder } = useParams();
-  const [rowData, setRowData] = useState(null);
-  const [fetchError, setFetchError] = useState(false);
-  const [heading, setHeading] = useState('');
-  const [idToken] = useState(getIdToken())
+
   const ref = React.useRef(null);
   const { pathname } = useLocation();
+  const { heading } = useTitle(folder)
 
   useEffect(() => {
     ref.current?.focus();
-  }, [pathname]);
+  }, [ pathname ]);
 
   const { t } = useTranslation();
-
-  useEffect(() => {
-    //var title = folder ? `${folder} - ${t('heading')}` : `${t('heading')}`;
-    var title = `${folder ?? t('heading')}`;
-    if(title === 'palju') {
-      title = `${t('heading')}`;
-    }
-    title = title.replace('palju','');
-
-    document.title = title;
-    setHeading(title);
-
-    fetch(`${config.apiUrl}${folder || config.defaultFolder}/`, {
-      headers: {
-        Authorization: 'Bearer ' + idToken
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then(jsonRes => {
-        if (jsonRes.aineisto) {
-          setRowData(jsonRes.aineisto);
-        } else {
-          throw Error('Malformed response');
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        setFetchError(true);
-        setRowData([]);
-      });
-  }, [folder, t, idToken]);
+  const { rowData, fetchError, idToken } = useFolderApiData(folder, t);
 
   return (
     <>
-      <div id='top' className='accessibility-shortcuts' ref={ref} tabIndex={-1}>
+      <div id='top' className='accessibility-shortcuts' ref={ ref } tabIndex={ -1 }>
         <a href='#content' className='sr-only sr-only-focusable'>
-          {t('go_to_content')}
+          { t('go_to_content') }
         </a>
         <a href='#result' className='sr-only sr-only-focusable'>
-          {t('go_to_search_result')}
+          { t('go_to_search_result') }
         </a>
         <a href='#footer' className='sr-only sr-only-focusable'>
-          {t('go_to_footer')}
+          { t('go_to_footer') }
         </a>
       </div>
       <div className='page-wrapper'>
-        <div className='header' tabIndex={-1}>
+        <div className='header' tabIndex={ -1 }>
           <div className='logo'>
             <a href='https://vayla.fi' id='page-top'>
               <img
-                src={i18n.language === 'en' ? logo_en : logo}
+                src={ i18n.language === 'en' ? logo_en : logo }
                 alt='Väylävirasto'
               />
             </a>
@@ -92,19 +49,19 @@ const GridContainer = () => {
           <div className='logout'>
             <button
               className='lang-btn'
-              onClick={() => i18n.changeLanguage('fi')}
+              onClick={ () => i18n.changeLanguage('fi') }
             >
               Suomi
             </button>
             <button
               className='lang-btn'
-              onClick={() => i18n.changeLanguage('sv')}
+              onClick={ () => i18n.changeLanguage('sv') }
             >
               Svenska
             </button>
             <button
               className='lang-btn'
-              onClick={() => i18n.changeLanguage('en')}
+              onClick={ () => i18n.changeLanguage('en') }
             >
               English
             </button>
@@ -112,21 +69,21 @@ const GridContainer = () => {
         </div>
 
         <div className='content-area'>
-          <h1 id='content'>{heading}</h1>
+          <h1 id='content'>{ heading }</h1>
 
           <p tabIndex='-1'>
-            {t('about_open_contact_text')}:{' '}
+            { t('about_open_contact_text') }:{ ' ' }
             <a
               tabIndex='0'
-              href={`mailto:${t('about_open_contact_email')}`}
+              href={ `mailto:${ t('about_open_contact_email') }` }
               rel='noreferrer'
             >
-              {t('about_open_contact_email')}
+              { t('about_open_contact_email') }
             </a>
           </p>
         </div>
       </div>
-      <Grid rowData={rowData} fetchError={fetchError} idToken={idToken} />
+      <Grid rowData={ rowData } fetchError={ fetchError } idToken={ idToken }/>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import ClickableCellRenderer from './ClickableCellRenderer';
 import ClickableCellRendererSize from './ClickableCellRendererSize';
@@ -6,7 +6,7 @@ import ClickableCellRendererModified from './ClickableCellRendererModified';
 import { AG_GRID_LOCALE_FI } from '../locale.fi.js';
 import { useParams, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getParentPath, getBtnNextAriaLabel } from '../helpers';
+import { getBtnNextAriaLabel, getParentPath } from '../helpers';
 import { config } from '../App';
 import Breadcrumb from './Breadcrumb';
 
