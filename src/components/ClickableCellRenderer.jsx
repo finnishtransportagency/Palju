@@ -1,38 +1,12 @@
 import React from 'react';
-import { withRouter, Link, useParams } from 'react-router-dom';
+import { Link, useParams, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { config } from '../App';
 import { getParentPath } from '../helpers';
-  
+
 const Cell = props => {
   const [indexHTML, setIndexHTML] = React.useState(null);
   const { t } = useTranslation();
-
-  React.useEffect(() => {
-    fetch(`${config.apiUrl}/${props.value}`, {
-      headers: {
-        Authorization: 'Bearer ' + props.idToken
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        const index = data?.aineisto?.find(row =>
-          row.tiedosto.includes('index.html')
-        );
-
-        if (!index) {
-          return;
-        }
-
-        fetch(`${config.apiUrl}/${index.tiedosto}`, {
-          headers: {
-            Authorization: 'Bearer ' + props.idToken
-          }
-        })
-          .then(res => res.json())
-          .then(data => setIndexHTML(data.signedUrl));
-      });
-  }, [indexHTML, props]);
 
   if (indexHTML !== null && indexHTML.includes(props.value + 'index.htm')) {
     return (
@@ -65,7 +39,6 @@ const ClickableCellRenderer = props => {
         if (!signedUrl) {
           throw Error('Signed URL missing from response');
         }
-
 
         window.location.assign(signedUrl);
       })

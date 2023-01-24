@@ -16,34 +16,6 @@ export const Cell = props => {
   const [indexHTML, setIndexHTML] = React.useState(null);
   const { t } = useTranslation();
 
-  React.useEffect(() => {
-    fetch(`${config.apiUrlFolders}/${props.value}`, {
-      headers: {
-        Authorization: 'Bearer ' + props.idToken
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        const index = data?.aineisto?.find(row =>
-          row.tiedosto.includes('index.html')
-        );
-
-        if (!index) {
-          return;
-        }
-      
-        fetch(`${config.apiUrlFolders}/${index.tiedosto}`, {
-          headers: {
-            Authorization: 'Bearer ' + props.idToken
-          }
-        })
-          .then(res => res.json())        
-          .then(data => setIndexHTML(data.url))                
-      });
-  }, [indexHTML, props]);
-
-
-
   if (indexHTML !== null) {
     return (
       <span tabIndex='0' title={props.value}>
