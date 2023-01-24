@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 
 export const useTitle = folder => {
-  const [title, setTitle] = useState('');
+  const [title, ] = useState('');
   const [heading, setHeading] = useState('');
   const { t } = useTranslation();
   // TODO refactor title creation to new custom hook
