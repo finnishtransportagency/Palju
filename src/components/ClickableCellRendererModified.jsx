@@ -1,18 +1,14 @@
 import React from 'react';
-import { withRouter, Link, useParams } from 'react-router-dom';
-import { config } from '../App';
-import { useTranslation } from 'react-i18next';
-import { getParentPath } from '../helpers';
+import { withRouter } from 'react-router-dom';
 
 export const Cell = props => {
-  const [indexHTML, setIndexHTML] = React.useState(null);
-  const { t } = useTranslation();
+  const [indexHTML, ] = React.useState(null);
 
-  const getIndexSize = () => {
-    const fullPath = props.value + 'index.html'
-    //props.value = props.value + 'index.html'
-    return fullPath
-  }
+  // const getIndexSize = () => {
+  //   const fullPath = props.value + 'index.html'
+  //   //props.value = props.value + 'index.html'
+  //   return fullPath
+  // }
 
   if (indexHTML !== null) {
     return (
@@ -26,13 +22,8 @@ export const Cell = props => {
 };
 
 const ClickableCellRendererModified = props => {
-  const { folder } = useParams();
-
 
   const GetLink = () => {
-    const { t } = useTranslation();
-    const parentPath = getParentPath(folder);
-
 
     const GetModifiedDate = () => {
       var d = new Date(props.data.lastmodified),

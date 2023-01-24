@@ -5,7 +5,7 @@ import { config } from '../App';
 import { getParentPath } from '../helpers';
 
 const Cell = props => {
-  const [indexHTML, setIndexHTML] = React.useState(null);
+  const [indexHTML, ] = React.useState(null);
   const { t } = useTranslation();
 
   if (indexHTML !== null && indexHTML.includes(props.value + 'index.htm')) {
