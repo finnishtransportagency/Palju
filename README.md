@@ -53,3 +53,5 @@ CI flow->
     1. `REACT_APP_FOLDERS_URL="value" npx react-inject-env set`
     2.  To add multiple values on same line `REACT_APP_FOLDERS_URL="value" REACT_APP_FOLDERS_URL_2="value2" && npx react-inject-env set`
 4. Upload all files to S3 bucket to be hosted.
+
+
