@@ -27,7 +27,7 @@
     "start": "react-scripts start",
     "build:test": "dotenv -e .env.test -- react-scripts build",
     "build:prod": "dotenv -e .env.production -- react-scripts build",
-    "test": "react-scripts test",
+    "test": "NODE_OPTIONS=--experimental-vm-modules react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -51,6 +51,12 @@
   "devDependencies": {
     "prettier": "^2.2.1",
     "react-inject-env": "^2.1.0",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "ts-jest": "^29.0.5"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }

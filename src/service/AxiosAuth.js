@@ -1,8 +1,7 @@
-import axios, { HttpStatusCode } from "axios";
-import axiosRetry from 'axios-retry';
 import { getIdToken } from "./AuthService";
 import jwt_decode from "jwt-decode";
-import { deleteAllCookies } from "./CookieService";
+import axios, { HttpStatusCode } from "axios";
+import axiosRetry from "axios-retry";
 // Exported axios instance with user and content type headers
 export const axiosAuth = axios.create()
 
@@ -12,7 +11,7 @@ const onRetry = (retryCount, error, requestConfig) => {
 
 // Custom retry delay, retry amount and onRetry console.log for errors.
 axiosRetry(axiosAuth, {
-  retries: process.env.REACT_APP_AXIOS_RETRY_COUNT || 3,
+  retries: process.env.REACT_APP_AXIOS_RETRY_COUNT || 1,
   retryDelay: (retryCount) => {
     return retryCount * 1000;
   },
@@ -25,21 +24,33 @@ axiosAuth.interceptors.request.use(function (config) {
   // Set default headers to application/json
   config.headers.Accept = 'application/json';
   config.headers['Content-Type'] = 'application/json';
-
   const apiToken = getIdToken();
 
-  let decoded;
+  let decoded = {};
   try {
     decoded = jwt_decode(apiToken);
   } catch (e) {
     console.log(e)
   }
 
-  if (decoded?.exp === 'undefined' && decoded.exp * 1000 < Date.now()) {
-    console.log('Token is expired / you need to clear cookies and do a new login')
-    alert('Token is expired / you need to clear cookies and do a new login')
-    deleteAllCookies()
-    window.location.assign('/')
+  if (decoded.hasOwnProperty('exp') && decoded.exp * 1000 < Date.now()) {
+
+    if (window.confirm('Token is expired, do you allow refreshing it?')) {
+      // Save it!
+      const logoutUrl = `${ window.location.protocol }//${ window.location.host }/signout`
+      axios.get(logoutUrl).then(r => {
+          console.log(r)
+          window.location.assign("/")
+        }
+      ).catch(reason => {
+        console.log(reason)
+        window.location.assign("/")
+      })
+
+    } else {
+      // Do nothing!
+      console.log('Preventing cookie deletion');
+    }
   }
 
   if (apiToken) {
@@ -66,7 +77,6 @@ axiosAuth.interceptors.response.use(function (response) {
   if (error?.response?.status === HttpStatusCode.Unauthorized) {
     console.log(error?.response?.status)
   }
-
 
   return Promise.reject(error);
 });
