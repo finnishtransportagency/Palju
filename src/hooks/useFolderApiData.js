@@ -6,7 +6,7 @@ import { HttpStatusCode } from "axios";
 
 export const useFolderApiData = (folder, t) => {
   const [ idToken ] = useState(getIdToken())
-  const [ rowData, setRowData ] = useState(null);
+  const [ rowData, setRowData ] = useState([]);
   const [ fetchError, setFetchError ] = useState(false);
 
   useEffect(() => {
