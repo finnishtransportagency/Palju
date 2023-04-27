@@ -6,7 +6,7 @@ const resources = {
     translation: {
       heading: 'Väylävirasto - Palvelualusta julkaisuille',
       about_open_contact_text: 'Yhteystiedot ',
-      about_open_contact_email: 'sd@ambientia.fi',
+      about_open_contact_email: 'servicedesk@ambientia.fi',
       loading_content: 'Ladataan sisältöä...',
       showing: 'Näytetään',
       name: 'Nimi',
@@ -46,7 +46,7 @@ const resources = {
     translation: {
       heading: 'Finnish Transport Infrastructure Agency -  Service platform for publications',
       about_open_contact_text: 'Contact information :',
-      about_open_contact_email: 'sd@ambientia.fi',
+      about_open_contact_email: 'servicedesk@ambientia.fi',
       loading_content: 'Loading content...',
       showing: 'Showing',
       name: 'Name',
@@ -86,7 +86,7 @@ const resources = {
     translation: {
       heading: 'Trafikledsverket – Tjänsteplattform för publikationer',
       about_open_contact_text: 'Kontaktinformation ',
-      about_open_contact_email: 'sd@ambientia.fi',
+      about_open_contact_email: 'servicedesk@ambientia.fi',
       loading_content: 'Innehållet laddas',
       showing: 'Som visar',
       name: 'Namn',
