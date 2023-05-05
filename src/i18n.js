@@ -45,7 +45,7 @@ const resources = {
   en: {
     translation: {
       heading: 'Finnish Transport Infrastructure Agency -  Service platform for publications',
-      about_open_contact_text: 'Contact information :',
+      about_open_contact_text: 'Contact information ',
       about_open_contact_email: 'servicedesk@ambientia.fi',
       loading_content: 'Loading content...',
       showing: 'Showing',
