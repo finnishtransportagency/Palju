@@ -37,9 +37,7 @@ const resources = {
       go_to_header: 'Siirry headeriin',
       folder: 'Hakemisto',
       file: 'Tiedosto',
-      go_back: 'Palaa takaisin',
-      license_prefix: 'Tämä teos on lisensoitu',
-      license_postfix: 'Creative Commons Nimeä 4.0 Kansainvälinen -lisenssillä'
+      go_back: 'Palaa takaisin'
     }
   },
   en: {
@@ -77,9 +75,7 @@ const resources = {
       go_to_header: 'Go to header',
       folder: 'Folder',
       file: 'File',
-      go_back: 'Go back',
-      license_prefix: 'This work is licensed under a',
-      license_postfix: 'Creative Commons Attribution 4.0 International License'
+      go_back: 'Go back'
     }
   },
   sv: {
@@ -117,9 +113,7 @@ const resources = {
       go_to_header: 'Gå till header',
       folder: 'Mapp',
       file: 'Fil',
-      go_back: 'Gå tillbaka',
-      license_prefix: 'Detta verk är licensierat under en',
-      license_postfix: 'Creative Commons Erkännande 4.0 Internationell Licens'
+      go_back: 'Gå tillbaka'
     }
   }
 };

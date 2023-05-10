@@ -212,14 +212,6 @@ const Grid = ({ rowData, fetchError, history, location, idToken }) => {
           {t('show_more')}
         </button>
       </div>
-      <div id="license-rules">
-        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-          <img src="https://licensebuttons.net/l/by/4.0/88x31.png" alt="Creative Commons License"/>
-        </a>
-        <span className="license-rules">
-        {t('license_prefix')} <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{t('license_postfix')}</a>
-        </span>
-      </div>
     </div>
   );
 };
