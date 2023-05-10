@@ -123,13 +123,7 @@ body {
     }
   }
 }
-#license-rules {
-  display: flex;
-  align-items: center;
-}
-#license-rules a{
-  padding: 0px 16px 0px 1px;
-}
+
 .ag-theme-alpine {
   @include ag-theme-alpine(
     (
