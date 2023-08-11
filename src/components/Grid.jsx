@@ -3,6 +3,7 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import ClickableCellRenderer from './ClickableCellRenderer';
 import ClickableCellRendererSize from './ClickableCellRendererSize';
 import ClickableCellRendererModified from './ClickableCellRendererModified';
+import ClickableCellRendererDownload from './ClickableCellRendererDownload';
 import { AG_GRID_LOCALE_FI } from '../locale.fi.js';
 import { useParams, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -156,7 +157,8 @@ const Grid = ({ rowData, fetchError, history, location, idToken }) => {
           frameworkComponents={{
             clickableCellRenderer: ClickableCellRenderer,
             clickableCellRendererModified: ClickableCellRendererModified,
-            clickableCellRendererSize: ClickableCellRendererSize,   
+            clickableCellRendererSize: ClickableCellRendererSize,
+            clickableCellRendererDownload: ClickableCellRendererDownload,
             customLoadingOverlay: CustomLoadingOverlay
           }}
           loadingOverlayComponent={'customLoadingOverlay'}
@@ -200,6 +202,18 @@ const Grid = ({ rowData, fetchError, history, location, idToken }) => {
             cellRenderer='clickableCellRendererSize'
             cellRendererParams={{ idToken }}          
             sortable={true}       
+          />
+          <AgGridColumn
+              flex={150}
+              minWidth={100}
+              suppressMovable={false}
+              hide={false}
+              lockVisible={false}
+              lockPinned={false}
+              headerName={t('download_header')}
+              field='download'
+              cellRenderer='clickableCellRendererDownload'
+              sortable={false}
           />
         </AgGridReact>
         <button
