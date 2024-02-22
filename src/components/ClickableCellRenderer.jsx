@@ -40,7 +40,7 @@ const ClickableCellRenderer = props => {
           throw Error('Signed URL missing from response');
         }
 
-        window.location.assign(signedUrl);
+        window.open(`${signedUrl}`, '_blank');
       })
       .catch(console.error);
   };
