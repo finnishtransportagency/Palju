@@ -44,7 +44,7 @@ describe('App renders correctly', () => {
 
     });
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveTextContent(/ptptuki@sitowise.com/i);
+    expect(linkElement).toHaveTextContent(/paikkatieto@vayla.fi/i);
   });
 
   test('renders contact information on sv language', async () => {
@@ -53,7 +53,7 @@ describe('App renders correctly', () => {
       render(<App/>);
       const linkElement = screen.getByText(/Kontaktinformation/i);
       expect(linkElement).toBeInTheDocument();
-      expect(linkElement).toHaveTextContent(/ptptuki@sitowise.com/i);
+      expect(linkElement).toHaveTextContent(/paikkatieto@vayla.fi/i);
     });
   });
 
@@ -65,7 +65,7 @@ describe('App renders correctly', () => {
       render(<App/>);
       const linkElement = screen.getAllByText(/Contact information/i)[0];
       expect(linkElement).toBeInTheDocument();
-      expect(linkElement).toHaveTextContent(/ptptuki@sitowise.com/i);
+      expect(linkElement).toHaveTextContent(/paikkatieto@vayla.fi/i);
     });
 
   });
